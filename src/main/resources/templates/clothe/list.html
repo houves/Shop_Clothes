@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<!--xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+lang="en"-->
+<head>
+    <meta charset="UTF-8">
+    <title>My Book List</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="layout :: header"></th:block>
+<div class="container">
+    <h1 th:text=${title}></h1>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Action</th>
+            <!--<th sec:authorize="hasAnyAuthority('AD')">Action</th>-->
+        </tr>
+        <tr th:each="clothe : ${clothes}">
+            <td th:text="${clothe.id}"></td>
+            <td th:text="${clothe.name}"></td>
+            <td>
+            <img th:src="${clothe.image}"></img>
+            </td>
+            <td th:text="${clothe.price}"></td>
+            <td th:text="${clothe.category.name}"></td>
+            <td>
+                <!-- sec:authorize="hasAnyAuthority('AD')">-->
+                <a th:href="@{/clothes/edit/{id}(id=${clothe.id})}" class="text-info">Edit</a>
+                <a th:href="@{/clothes/delete/{id}(id=${clothe.id})}"
+                   onclick="return confirm ('Are you sure?')" class="text-danger">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<th:block th:replace="layout :: footer"></th:block>
+</body>
+</html>
