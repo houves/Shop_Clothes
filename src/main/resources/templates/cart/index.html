@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body>
+    <th:block th:replace="layout :: header"></th:block>
+    <div class="container">
+        <div th:each="cart : ${carts}">
+            <span style="max-width: 100px;" th:text="${cart.clothe.name}"></span>
+            <div style="max-width: 200px;">
+                <img style="width: 200px; height: 200px;" th:src="@{'/images/' + ${cart.clothe.image}}" />
+
+            </div>
+            <soan th:text="${cart.clothe.price}"></soan>
+            <span th:text="${cart.clothe.category.name}"></span>
+            <span><input th:text="${cart.quantity}"/></span>
+        </div>
+    </div>
+    <span th:text="${totalPrice}"></span>
+
+</body>
+</html>

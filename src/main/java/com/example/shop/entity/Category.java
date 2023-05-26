@@ -18,4 +18,6 @@ public class Category {
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Clothe> clothes;
+
+
 }

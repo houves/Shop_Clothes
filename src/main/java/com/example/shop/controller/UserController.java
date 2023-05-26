@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class UserController {
+public class UserController{
     @Autowired
     private UserService userService;
     @GetMapping("/login")
     public String login() {
         return "user/login";
     }
+
 
     @GetMapping("/register")
     public String register(Model model) {

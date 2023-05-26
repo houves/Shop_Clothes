@@ -8,6 +8,9 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -38,4 +41,7 @@ public class Clothe {
     @JoinColumn(name="user_id", referencedColumnName = "id")
     @ValidUserId
     private User user;
+
+    @OneToMany(mappedBy = "clothe", cascade = CascadeType.ALL)
+    private List<Cart> carts;
 }
