@@ -26,59 +26,65 @@
       <!-- Begin Page Content -->
 
       <div class="container">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Mặt hàng sản phẩm</h6>
+          </div>
+          <div class="card-body">
 
-        <div class="row mt-4">
-          <div class="col-2">
-            <div class="d-flex justify-content-center flex-column gap-2">
-                <a href="/admin/adminClothe/addClotheAdmin" class="btn btn-primary">Add Clothes</a>
-              <span>Bộ lọc tìm kiếm</span>
-              <span>Tìm theo danh mục</span>
-              <span th:each="category : ${categories}">
+              <div class="row mt-4">
+                <div class="col-2">
+                  <div class="d-flex justify-content-center flex-column gap-2">
+                    <a href="/admin/adminClothe/addClotheAdmin" class="btn btn-primary">Add Clothes</a>
+                    <span>Bộ lọc tìm kiếm</span>
+                    <span>Tìm theo danh mục</span>
+                    <span th:each="category : ${categories}">
                     <a th:href="@{/search/{id}(id=${category.id})}" class="d-flex gap-2 text-decoration-none text-dark">
                         <input type="checkbox"/>
                         <span th:text="${category.name}"></span>
                     </a>
                 </span>
-              <hr />
-              <span>Tìm theo giá</span>
-              <span th:each="price : ${prices}">
+                    <hr />
+                    <span>Tìm theo giá</span>
+                    <span th:each="price : ${prices}">
                     <a th:href="@{/search/price/{id}(id=${price})}" class="d-flex gap-2 text-decoration-none text-dark">
                         <input type="checkbox"/>
                         <span th:text="${price}"></span>
                     </a>
                 </span>
-            </div>
-          </div>
+                  </div>
+                </div>
+                <table class="col-10 text-center">
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Action</th>
+                    <!--<th sec:authorize="hasAnyAuthority('AD')">Action</th>-->
+                  </tr>
+                  <tr th:each="clothe : ${clothes}">
+                    <td th:text="${clothe.id}"></td>
+                    <td style="max-width: 100px;" th:text="${clothe.name}"></td>
+                    <td style="max-width: 200px;">
+                      <img style="width: 200px; height: 200px;" th:src="@{'/images/' + ${clothe.image}}" />
+                    </td>
+                    <td th:text="${clothe.price}"></td>
+                    <td th:text="${clothe.category.name}"></td>
+                    <td>
+                      <!-- sec:authorize="hasAnyAuthority('AD')">-->
+                      <a th:href="@{/admin/adminClothe/editClotheAdmin/{id}(id=${clothe.id})}" class="text-info">Edit</a>
+                      <a th:href="@{/admin/adminClothe/deleteClotheAdmin/{id}(id=${clothe.id})}"
+                         onclick="return confirm ('Are you sure?')" class="text-danger">Delete</a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
 
-          <table class="col-10 text-center">
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Image</th>
-              <th>Price</th>
-              <th>Category</th>
-              <th>Action</th>
-              <!--<th sec:authorize="hasAnyAuthority('AD')">Action</th>-->
-            </tr>
-            <tr th:each="clothe : ${clothes}">
-              <td th:text="${clothe.id}"></td>
-              <td style="max-width: 100px;" th:text="${clothe.name}"></td>
-              <td style="max-width: 200px;">
-                <img style="width: 200px; height: 200px;" th:src="@{'/images/' + ${clothe.image}}" />
-              </td>
-              <td th:text="${clothe.price}"></td>
-              <td th:text="${clothe.category.name}"></td>
-              <td>
-                <!-- sec:authorize="hasAnyAuthority('AD')">-->
-                <a th:href="@{/admin/adminClothe/editClotheAdmin/{id}(id=${clothe.id})}" class="text-info">Edit</a>
-                <a th:href="@{/admin/adminClothe/deleteClotheAdmin/{id}(id=${clothe.id})}"
-                   onclick="return confirm ('Are you sure?')" class="text-danger">Delete</a>
-              </td>
-            </tr>
-          </table>
+          </div>
         </div>
       </div>
-
       <!-- /.container-fluid -->
 
     </div>
