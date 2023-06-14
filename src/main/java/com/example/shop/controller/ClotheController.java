@@ -137,7 +137,7 @@ public class ClotheController{
         return "redirect:/clothes";
     }
     @GetMapping("/delete/{id}")
-    public String deleteBook(@PathVariable("id") Long id, Model model){
+    public String deleteClothe(@PathVariable("id") Long id, Model model){
         Clothe clothe = clothesService.getClothesById(id);
         clothesService.deleteClothes(id);
         return "redirect:/clothes";

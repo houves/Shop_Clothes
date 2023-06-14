@@ -74,9 +74,7 @@ public class ClothesService {
     }
 
 
-    public  void addClothes(Clothe clothe){
-        clothesRepository.save(clothe);
-    }
+    public  void addClothes(Clothe clothe){clothesRepository.save(clothe);}
     public void updateClothes(Clothe clothe){
         clothesRepository.save(clothe);
     }

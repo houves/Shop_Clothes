@@ -1,13 +1,11 @@
 package com.example.shop.service;
 
 import com.example.shop.entity.Cart;
-import com.example.shop.entity.Category;
 import com.example.shop.repository.ICartReponsitory;
 import com.example.shop.repository.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service

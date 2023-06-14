@@ -1,18 +1,10 @@
 package com.example.shop.controller;
 
-import com.example.shop.entity.Cart;
-import com.example.shop.entity.User;
-import com.example.shop.repository.IUserRepository;
-import com.example.shop.service.CartService;
+//import com.example.shop.repository.IUserRepository;
 import com.example.shop.service.UserService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/cart")
