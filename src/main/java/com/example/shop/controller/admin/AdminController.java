@@ -19,6 +19,9 @@ public class AdminController {
     private UserService userService;
     @GetMapping
     public String homeAdmin(){return "admin/index";}
+    @GetMapping("/listNV")
+    public String showAllNV(){return "admin/listNV";}
+
     @GetMapping("/adminUser/listAdminUser")
     public String showAllUser(Model model){
         List<User> users = userService.getAllUser();

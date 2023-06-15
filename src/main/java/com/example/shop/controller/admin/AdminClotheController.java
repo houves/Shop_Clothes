@@ -117,7 +117,7 @@ public class AdminClotheController {
         uploadFile(name, price, category, image, id);
         return "redirect:/admin/adminClothe/listClotheAdmin";
     }
-    @GetMapping("/deleteClotheAdmin/{id}")
+        @GetMapping("/deleteClotheAdmin/{id}")
     public String deleteClotheAdmin(@PathVariable("id") Long id, Model model){
         Clothe clothe = clothesService.getClothesById(id);
         clothesService.deleteClothes(id);

@@ -73,7 +73,7 @@ public class AdminCategoryController {
     }
     @GetMapping("/addCategoryAdmin")
     public String addCategoryAdminForm(Model model){
-        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("categories", new Category());
         return "admin/adminCategory/addCategoryAdmin";
     }
     @PostMapping("/addCategoryAdmin")
@@ -81,7 +81,7 @@ public class AdminCategoryController {
                                  @RequestParam("image") MultipartFile image)
     {
         uploadFile(name, image, -1);
-        return "redirect:/admin/adminCategory/addCategoryAdmin";
+        return "redirect:/admin/adminCategory/listCategoryAdmin";
     }
     @GetMapping("/editCategoryAdmin/{id}")
     public String editCategoryAdminForm(@PathVariable("id") Long id, Model model) {
