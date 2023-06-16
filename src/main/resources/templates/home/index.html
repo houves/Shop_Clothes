@@ -8,12 +8,59 @@
 <body>
 <th:block th:replace="layout :: header"></th:block>
 <div class="container">
-  <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        Trang Chủ Ứng Dụng Quản Lý Cửa Hàng Bán Quần Áo - Kết Nối CSDL MYSQL</a>
-    </div>
-  </nav>
+    <div class="row mt-4">
+          <div class="col-2">
+              <div class="d-flex justify-content-center flex-column gap-2">
+                  <span>Bộ lọc tìm kiếm</span>
+                  <span>Tìm theo danh mục</span>
+                  <span th:each="category : ${categories}">
+                    <a th:href="@{/search/{id}(id=${category.id})}" class="d-flex gap-2 text-decoration-none text-dark">
+                        <input type="checkbox"/>
+                        <span th:text="${category.name}"></span>
+                    </a>
+                </span>
+                  <hr />
+                  <span>Tìm theo giá</span>
+                  <span th:each="price : ${prices}">
+                    <a th:href="@{/search/price/{id}(id=${price})}" class="d-flex gap-2 text-decoration-none text-dark">
+                        <input type="checkbox"/>
+                        <span th:text="${price}"></span>
+                    </a>
+                </span>
+              </div>
+          </div>
+
+          <div class="row">
+              <table class="col-10 text-center">
+                  <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Image</th>
+                      <th>Price</th>
+                      <th>Category</th>
+                      <th>Action</th>
+                      <!--<th sec:authorize="hasAnyAuthority('AD')">Action</th>-->
+                  </tr>
+                  <tr th:each="clothe : ${clothes}">
+                      <td th:text="${clothe.id}"></td>
+                      <td style="max-width: 100px;" th:text="${clothe.name}"></td>
+                      <td style="max-width: 200px;">
+                          <img style="width: 200px; height: 200px;" th:src="@{'/images/' + ${clothe.image}}" />
+
+                      </td>
+                      <td th:text="${clothe.price}"></td>
+                      <td th:text="${clothe.category.name}"></td>
+                      <td>
+                          <!-- sec:authorize="hasAnyAuthority('AD')">-->
+                          <a th:href="@{/clothes/edit/{id}(id=${clothe.id})}" class="text-info">Edit</a>
+                          <a th:href="@{/clothes/delete/{id}(id=${clothe.id})}"
+                             onclick="return confirm ('Are you sure?')" class="text-danger">Delete</a>
+                          <a th:href="@{/cart/buy/{id}(id=${clothe.id})}" class="btn btn-primary">Buy</a>
+                      </td>
+                  </tr>
+              </table>
+          </div>
+      </div>
 </div>
 <th:block th:replace="layout :: footer"></th:block>
 </body>

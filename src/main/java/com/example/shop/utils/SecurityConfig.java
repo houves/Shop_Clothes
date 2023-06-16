@@ -35,18 +35,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws
             Exception {
-        return http.csrf().disable()
+        return http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers( "/css/**", "/js/**", "/", "/register",
                                 "/error")
                         .permitAll()
 
-                        .requestMatchers( "/books/edit", "/books/delete")
-
+                        .requestMatchers( "/clothes/edit", "/clothes/delete")
                         .authenticated()
 
-                        .requestMatchers("/books", "/books/add")
-
+                        .requestMatchers("/clothes", "/clothes/add")
                         .authenticated()
 
                         .anyRequest().authenticated()

@@ -31,30 +31,9 @@
             <h6 class="m-0 font-weight-bold text-primary">Mặt hàng sản phẩm</h6>
           </div>
           <div class="card-body">
-
-              <div class="row mt-4">
-                <div class="col-2">
-                  <div class="d-flex justify-content-center flex-column gap-2">
-                    <a href="/admin/adminClothe/addClotheAdmin" class="btn btn-primary">Add Clothes</a>
-                    <span>Bộ lọc tìm kiếm</span>
-                    <span>Tìm theo danh mục</span>
-                    <span th:each="category : ${categories}">
-                    <a th:href="@{/search/{id}(id=${category.id})}" class="d-flex gap-2 text-decoration-none text-dark">
-                        <input type="checkbox"/>
-                        <span th:text="${category.name}"></span>
-                    </a>
-                </span>
-                    <hr />
-                    <span>Tìm theo giá</span>
-                    <span th:each="price : ${prices}">
-                    <a th:href="@{/search/price/{id}(id=${price})}" class="d-flex gap-2 text-decoration-none text-dark">
-                        <input type="checkbox"/>
-                        <span th:text="${price}"></span>
-                    </a>
-                </span>
-                  </div>
-                </div>
-                <table class="col-10 text-center">
+            <a href="/admin/adminClothe/addClotheAdmin" class="btn btn-primary">Add Clothes</a>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable">
                   <tr>
                     <th>ID</th>
                     <th>Name</th>

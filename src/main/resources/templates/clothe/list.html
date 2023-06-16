@@ -58,7 +58,18 @@ lang="en"-->
                 <a th:href="@{/clothes/edit/{id}(id=${clothe.id})}" class="text-info">Edit</a>
                 <a th:href="@{/clothes/delete/{id}(id=${clothe.id})}"
                    onclick="return confirm ('Are you sure?')" class="text-danger">Delete</a>
-                <a th:href="@{/cart/buy/{id}(id=${clothe.id})}" class="btn btn-primary">Buy</a>
+<!--                <a th:href="@{/cart/buy/{id}(id=${clothe.id})}" class="btn btn-primary">Buy</a>-->
+            <td>
+                <form th:action="@{/clothes/add-to-cart}" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-success"
+                            onclick="return confirm('Are you sure you want to add this clothe to cart?')">Add to cart</button>
+                    <input type="hidden" name="id" th:value="${clothe.getId()}">
+                    <input type="hidden" name="name"
+                           th:value="${clothe.getName()}">
+                    <input type="hidden" name="price"
+                           th:value="${clothe.getPrice()}">
+                </form>
+            </td>
             </td>
         </tr>
     </table>

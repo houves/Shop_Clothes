@@ -1,6 +1,5 @@
 package com.example.shop.controller;
 
-import com.example.shop.entity.Cart;
 import com.example.shop.entity.Category;
 import com.example.shop.entity.Clothe;
 import com.example.shop.service.CategoryService;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

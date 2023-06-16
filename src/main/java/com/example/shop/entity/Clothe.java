@@ -8,9 +8,13 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.ToString;
+import org.hibernate.Hibernate;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -43,5 +47,17 @@ public class Clothe {
     private User user;
 
     @OneToMany(mappedBy = "clothe", cascade = CascadeType.ALL)
-    private List<Cart> carts;
+    @ToString.Exclude
+    private List<ItemInvoice> itemInvoices = new ArrayList<>();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Clothe clothe = (Clothe) o;
+        return getId() != null && Objects.equals(getId(), clothe.getId());
+    }
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

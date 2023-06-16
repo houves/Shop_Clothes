@@ -1,10 +1,13 @@
 package com.example.shop.controller;
 
+import com.example.shop.daos.Item;
 import com.example.shop.entity.Category;
 import com.example.shop.entity.Clothe;
 import com.example.shop.entity.User;
+import com.example.shop.service.CartService;
 import com.example.shop.service.CategoryService;
 import com.example.shop.service.ClothesService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +80,8 @@ public class ClotheController{
 
     @Autowired
     private ClothesService clothesService;
-
+    @Autowired
+    private CartService cartService;
     @Autowired
     private CategoryService categoryService;
 
@@ -104,18 +108,6 @@ public class ClotheController{
     @PostMapping("/add")
     public String addClothe(@RequestParam("name") String name, @RequestParam("price") double price, @RequestParam("category") long category, @RequestParam("image") MultipartFile image
                             ){
-      /*
-        if (bindingResult.hasErrors()) {
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                model.addAttribute(error.getField() + "_error",
-                        error.getDefaultMessage());
-            }
-
-            return "clothe/add";
-        }
-
-       */
         uploadFile(name, price, category, image, -1);
         return "redirect:/clothes";
     }
@@ -140,6 +132,19 @@ public class ClotheController{
     public String deleteClothe(@PathVariable("id") Long id, Model model){
         Clothe clothe = clothesService.getClothesById(id);
         clothesService.deleteClothes(id);
+        return "redirect:/clothes";
+    }
+    @PostMapping("/add-to-cart")
+    public String addToCart(HttpSession session,
+                            @RequestParam long id,
+                            @RequestParam String name,
+//                            @RequestParam String image,
+                            @RequestParam double price,
+                            @RequestParam(defaultValue = "1") int quantity)
+    {
+        var cart = cartService.getCart(session);
+        cart.addItems(new Item(id, name, price, quantity));
+        cartService.updateCart(session, cart);
         return "redirect:/clothes";
     }
 }

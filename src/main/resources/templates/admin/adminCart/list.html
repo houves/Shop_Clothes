@@ -28,38 +28,35 @@
       <div class="container">
         <div class="card shadow mb-4">
           <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables User</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Hóa Đơn</h6>
           </div>
           <div class="card-body">
-              <a href="/admin/adminCategory/addCategoryAdmin" class="btn btn-success">Add Category</a>
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>Action</th>
-                    <!--<th sec:authorize="hasAnyAuthority('AD')">Action</th>-->
-                  </tr>
-                  <tr th:each="category : ${categories}">
-                    <td th:text="${category.id}"></td>
-                    <td style="max-width: 100px;" th:text="${category.name}"></td>
-                    <td style="max-width: 200px;">
-                      <img style="width: 200px; height: 200px;" th:src="@{'/images/' + ${category.image}}" />
-                    </td>
-                    <td>
-                      <!-- sec:authorize="hasAnyAuthority('AD')">-->
-                      <a th:href="@{/admin/adminCategory/editCategoryAdmin/{id}(id=${category.id})}" class="text-info">Edit</a>
-                      <a th:href="@{/admin/adminCategory/deleteCategoryAdmin/{id}(id=${category.id})}"
-                         onclick="return confirm ('Are you sure?')" class="text-danger">Delete</a>
-                    </td>
-                  </tr>
-                </table>
-              </div>
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <tr>
+                  <th>ID</th>
+                  <th>Invoice_Date</th>
+                  <th>Total</th>
+                  <th>Action</th>
+                  <!--<th sec:authorize="hasAnyAuthority('AD')">Action</th>-->
+                </tr>
+                <tr th:each="invoice : ${invoices}">
+                  <td th:text="${invoice.id}"></td>
+                  <td style="max-width: 100px;" th:text="${invoice.invoiceDate}"></td>
+                  <td th:text="${invoice.price}"></td>
+                  <td>
+                    <!-- sec:authorize="hasAnyAuthority('AD')">-->
+                    <a th:href="@{/admin/adminCart/info/{id}(id=${invoice.id})}" class="text-info">Info</a>
+                    <a th:href="@{/admin/adminClothe/deleteClotheAdmin/{id}(id=${invoice.id})}"
+                       onclick="return confirm ('Are you sure?')" class="text-danger">Delete</a>
+                  </td>
+                </tr>
+              </table>
             </div>
+
+          </div>
         </div>
       </div>
-
       <!-- /.container-fluid -->
 
     </div>
